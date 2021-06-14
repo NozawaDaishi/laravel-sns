@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand navbar-dark blue-gradient">
 
-    <a class="navbar-brand" href="/"><i class="fas fa-chart-line mr-1"></i>Run on</a>
+    <a class="navbar-brand" href="/"><i class="fas fa-running mr-2"></i>Run on</a>
 
     <ul class="navbar-nav ml-auto">
 
