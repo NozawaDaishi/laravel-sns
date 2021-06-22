@@ -15,10 +15,16 @@
 
 <script>
     export default {
+        props: {
+            initialIsFollowedBy: {
+                type: Boolean,
+                default: false,
+            },
+        },
         data() {
-        return {
-            isFollowedBy: false,
-        }
+            return {
+                isFollowedBy: this.initialIsFollowedBy,
+            }
         },
         computed: {
         buttonColor() {
