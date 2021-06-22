@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand navbar-dark blue-gradient">
+<nav class="navbar navbar-expand navbar-dark aqua-gradient">
 
     <a class="navbar-brand" href="/"><i class="fas fa-running mr-2"></i>Run on</a>
 
