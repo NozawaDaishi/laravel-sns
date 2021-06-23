@@ -22,19 +22,19 @@
                     @endif
                 </div>
                 <h2 class="h5 card-title m-0">
-                <a href="{{ route('users.show', ['name' => $user->name]) }}" class="text-dark">
-                    {{ $user->name }}
-                </a>
+                    <a href="{{ route('users.show', ['name' => $user->name]) }}" class="text-dark">
+                        {{ $user->name }}
+                    </a>
                 </h2>
             </div>
             <div class="card-body">
                 <div class="card-text">
-                <a href="" class="text-muted">
-                    {{ $user->count_followings }} フォロー
-                </a>
-                <a href="" class="text-muted">
-                    {{ $user->count_followers }} フォロワー
-                </a>
+                    <a href="" class="text-muted">
+                        {{ $user->count_followings }} フォロー
+                    </a>
+                    <a href="" class="text-muted">
+                        {{ $user->count_followers }} フォロワー
+                    </a>
                 </div>
             </div>
         </div>
@@ -47,7 +47,7 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link text-muted"
-                    href="">
+                    href="{{ route('users.likes', ['name' => $user->name]) }}">
                     いいね
                 </a>
             </li>
