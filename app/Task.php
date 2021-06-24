@@ -7,22 +7,22 @@ use Illuminate\Database\Eloquent\Model;
 class Task extends Model
 {
     const STATUS = [
-        1 => [ 'label' => '未着手', 'class' => 'badge-danger' ],
-        2 => [ 'label' => '着手中', 'class' => 'badge-info' ],
-        3 => [ 'label' => '完了', 'class' => 'badge-success' ],
+        1 => [ 'badge' => '未着手', 'class' => 'badge-danger' ],
+        2 => [ 'badge' => '着手中', 'class' => 'badge-info' ],
+        3 => [ 'badge' => '完了', 'class' => 'badge-success' ],
     ];
 
     const IMPORTANT = [
-        1 => [ 'label' => '低' ],
-        2 => [ 'label' => '高' ],
+        1 => [ 'badge' => '低', 'class' => 'badge-pill badge-info' ],
+        2 => [ 'badge' => '高', 'class' => 'badge-pill badge-danger' ],
     ];
 
     const URGENT = [
-        1 => [ 'label' => '低' ],
-        2 => [ 'label' => '高' ],
+        1 => [ 'badge' => '低', 'class' => 'badge-pill badge-info' ],
+        2 => [ 'badge' => '高', 'class' => 'badge-pill badge-danger' ],
     ];
 
-    public function getStatusLabelAttribute()
+    public function getStatusBadgeAttribute()
     {
         $status = $this->attributes['status'];
 
@@ -30,10 +30,10 @@ class Task extends Model
             return '';
         }
 
-        return self::STATUS[$status]['label'];
+        return self::STATUS[$status]['badge'];
     }
 
-    public function getImportantLabelAttribute()
+    public function getImportantBadgeAttribute()
     {
         $important = $this->attributes['important'];
 
@@ -41,10 +41,10 @@ class Task extends Model
             return '';
         }
 
-        return self::IMPORTANT[$important]['label'];
+        return self::IMPORTANT[$important]['badge'];
     }
 
-    public function getUrgentLabelAttribute()
+    public function getUrgentBadgeAttribute()
     {
         $urgent = $this->attributes['urgent'];
 
@@ -52,7 +52,7 @@ class Task extends Model
             return '';
         }
 
-        return self::URGENT[$urgent]['label'];
+        return self::URGENT[$urgent]['badge'];
     }
 
     public function getStatusClassAttribute()
@@ -64,5 +64,27 @@ class Task extends Model
         }
 
         return self::STATUS[$status]['class'];
+    }
+
+    public function getImportantClassAttribute()
+    {
+        $important = $this->attributes['important'];
+
+        if (!isset(self::IMPORTANT[$important])) {
+            return '';
+        }
+
+        return self::IMPORTANT[$important]['class'];
+    }
+
+    public function getUrgentClassAttribute()
+    {
+        $urgent = $this->attributes['urgent'];
+
+        if (!isset(self::URGENT[$urgent])) {
+            return '';
+        }
+
+        return self::URGENT[$urgent]['class'];
     }
 }

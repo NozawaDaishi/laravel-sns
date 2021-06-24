@@ -34,7 +34,7 @@
             </div>
             <div class="col col-md-4">
                 <div class="list-group card mt-5">
-                    <div class="text-muted text-center list-group-item list-group-item-action bg-light d-flex justify-content-between">
+                    <div class="text-muted text-center font-weight-bold list-group-item list-group-item-action bg-light d-flex justify-content-between">
                         フォルダー
                         <div class="">
                             <div class="dropup">
@@ -66,13 +66,13 @@
             <div class="column col-md-8">
                 <div class="list-group align-items-center ">
                     <div class="card mt-5">
-                        <div class="text-muted text-center list-group-item list-group-item-action bg-light">
+                        <div class="text-muted text-center font-weight-bold list-group-item list-group-item-action bg-light">
                             タスク
                         </div>
-                        <table class="table text-center list-group-item list-group-item-action ">
+                        <table class="table table-hover text-center list-group-item list-group-item-action ">
                             <thead>
                                 <tr>
-                                    <th>タイトル</th>
+                                    <th >タイトル</th>
                                     <th>状態</th>
                                     <th>期限</th>
                                     <th>重要度</th>
@@ -88,16 +88,16 @@
                                             {{ $task->title }}
                                         </td>
                                         <td>
-                                            <h6><span class="badge {{ $task->status_class }}">{{ $task->status_label }}</span></h6>
+                                            <h6><span class="badge {{ $task->status_class }}">{{ $task->status_badge }}</span></h6>
                                         </td>
                                         <td>
                                             {{ $task->due_date }}
                                         </td>
                                         <td>
-                                            {{ $task->important_label }}
+                                            <h6><span class="badge {{ $task->important_class }}">{{ $task->important_badge }}</span></h6>
                                         </td>
                                         <td>
-                                            {{ $task->urgent_label }}
+                                            <h6><span class="badge {{ $task->urgent_class }}">{{ $task->urgent_badge }}</span></h6>
                                         </td>
                                         <td>
                                             <a href="#">編集</a>
@@ -114,6 +114,152 @@
                             <i class="fas fa-plus-circle"></i>
                         </a>
                     </div>
+                </div>
+            </div>
+        </div>
+        <div class="list-group align-item-center">
+            <div class="card m-5">
+                <div class="card-title text-center font-weight-bold text-muted bg-light list-group-item list-group-item-action">
+                    重要度・緊急度マトリクス
+                </div>
+                <div class="row mt-1 p-3">
+                    <div class="col col-md-3">
+                        <div class="list-group-item list-group-item-action text-center bg-danger text-dark">
+                            A
+                        </div>
+                        <table class="table table-bordered text-center">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th class="font-weight-bold">重要度</th>
+                                    <th class="font-weight-bold">緊急度</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><span class="badge badge-pill badge-danger">高</span></td>
+                                    <td><span class="badge badge-pill badge-danger">高</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        @foreach($tasks as $task)
+                            @if($task->important === 2 && $task->urgent === 2)
+                                <a href="" class="list-group-item list-group-item-action text-center">
+                                    {{ $task->title }}
+                                </a>
+                            @endif
+                        @endforeach
+                    </div>
+                    <div class="col col-md-3">
+                        <div class="list-group-item list-group-item-action text-center bg-secondary text-dark">
+                            B
+                        </div>
+                        <table class="table table-bordered text-center">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th class="font-weight-bold">重要度</th>
+                                    <th class="font-weight-bold">緊急度</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><span class="badge badge-pill badge-danger">高</span></td>
+                                    <td><span class="badge badge-pill badge-info">低</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        @foreach($tasks as $task)
+                            @if($task->important === 2 && $task->urgent === 1)
+                                <a href="" class="list-group-item list-group-item-action text-center">
+                                    {{ $task->title }}
+                                </a>
+                            @endif
+                        @endforeach
+                    </div>
+                    <div class="col col-md-3">
+                        <div class="list-group-item list-group-item-action text-center bg-warning text-dark">
+                            C
+                        </div>
+                        <table class="table table-bordered text-center">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th class="font-weight-bold">重要度</th>
+                                    <th class="font-weight-bold">緊急度</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="font-weight-bold"><span class="badge badge-pill badge-info">低</span></td>
+                                    <td class="font-weight-bold"><span class="badge badge-pill badge-danger">高</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        @foreach($tasks as $task)
+                            @if($task->important === 1 && $task->urgent === 2)
+                                <a href="" class="list-group-item list-group-item-action text-center">
+                                    {{ $task->title }}
+                                </a>
+                            @endif
+                        @endforeach
+                    </div>
+                    <div class="col col-md-3">
+                        <div class="list-group-item list-group-item-action text-center bg-info text-dark">
+                            D
+                        </div>
+                        <table class="table table-bordered text-center">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th class="font-weight-bold">重要度</th>
+                                    <th class="font-weight-bold">緊急度</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><span class="badge badge-pill badge-info">低</span></td>
+                                    <td><span class="badge badge-pill badge-info">低</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        @foreach($tasks as $task)
+                            @if($task->important === 1 && $task->urgent === 1)
+                                <a href="" class="list-group-item list-group-item-action text-center">
+                                    {{ $task->title }}
+                                </a>
+                            @endif
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+            <div class="list-group align-items-center">
+                <div class="card mb-5">
+                    <div class="text-muted text-center font-weight-bold list-group-item list-group-item-action bg-light">
+                        重要度・緊急度マトリクスの各領域
+                    </div>
+                    <table class="table table-bordered text-center list-group-item list-group-item-action">
+                        <thead>
+                        <tr>
+                            <th class="text-center bg-danger text-dark">A</th>
+                            <th class="text-center bg-secondary text-dark">B</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>実行しないと大きな損失が発生するタスク</td>
+                            <td>成長に大事な自己投資・啓発のタスク</td>
+                        </tr>
+                        </tbody>
+                        <thead>
+                        <tr>
+                            <th class="text-center bg-warning text-dark">C</th>
+                            <th class="text-center bg-info text-dark">D</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>他の人の仕事を止めないためのタスク</td>
+                            <td>本当はやらなくてもよいタスク</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
