@@ -69,7 +69,7 @@
                         <div class="text-muted text-center font-weight-bold list-group-item list-group-item-action bg-light">
                             タスク
                         </div>
-                        <table class="table table-hover text-center list-group-item list-group-item-action ">
+                        <table class="table text-center list-group-item list-group-item-action ">
                             <thead>
                                 <tr>
                                     <th >タイトル</th>
@@ -78,11 +78,32 @@
                                     <th>重要度</th>
                                     <th>緊急度</th>
                                     <th></th>
-                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach($tasks as $task)
+                                    <div id="modal-delete-{{ $task->id }}" class="modal fade" tabindex="-1" role="dialog">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="閉じる">
+                                                <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <form method="POST" action="">
+                                                @csrf
+                                                @method('DELETE')
+                                                <div class="modal-body">
+                                                    {{ $task->title }}を削除します。よろしいですか？
+                                                </div>
+                                                <div class="modal-footer justify-content-between">
+                                                <a class="btn btn-outline-grey" data-dismiss="modal">キャンセル</a>
+                                                <button type="submit" class="btn btn-danger">削除する</button>
+                                                </div>
+                                            </form>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <tr>
                                         <td>
                                             {{ $task->title }}
@@ -91,7 +112,7 @@
                                             <h6><span class="badge {{ $task->status_class }}">{{ $task->status_badge }}</span></h6>
                                         </td>
                                         <td>
-                                            {{ $task->due_date }}
+                                            {{ $task->formatted_due_date }}
                                         </td>
                                         <td>
                                             <h6><span class="badge {{ $task->important_class }}">{{ $task->important_badge }}</span></h6>
@@ -100,10 +121,20 @@
                                             <h6><span class="badge {{ $task->urgent_class }}">{{ $task->urgent_badge }}</span></h6>
                                         </td>
                                         <td>
-                                            <a href="#">編集</a>
-                                        </td>
-                                        <td>
-                                            <a href="#">削除</a>
+                                            <div class="dropup">
+                                                <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <i class="fas fa-ellipsis-v"></i>
+                                                </a>
+                                                <div class="dropdown-menu dropdown-menu-right" style="z-index: 99;">
+                                                    <a class="dropdown-item" href="">
+                                                        <i class="fas fa-pen mr-1"></i>タスクを編集する
+                                                    </a>
+                                                    <div class="dropdown-divider"></div>
+                                                    <a class="dropdown-item text-danger" data-toggle="modal" data-target="#modal-delete-{{ $task->id }}">
+                                                        <i class="fas fa-trash-alt mr-1"></i>タスクを削除する
+                                                    </a>
+                                                </div>
+                                            </div>
                                         </td>
                                     </tr>
                                 @endforeach
