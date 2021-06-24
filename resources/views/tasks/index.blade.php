@@ -125,7 +125,7 @@
                 <div class="row mt-1 p-3">
                     <div class="col col-md-3">
                         <div class="list-group-item list-group-item-action text-center bg-danger text-dark">
-                            A
+                                A
                         </div>
                         <table class="table table-bordered text-center">
                             <thead class="thead-dark">
