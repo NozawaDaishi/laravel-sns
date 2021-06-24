@@ -7,6 +7,14 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
+    public function search()
+    {
+        $search_text = $_GET['query'];
+        $users = User::where('name', 'Like', '%' .$search_text. '%')->get();
+
+        return view('users.search', compact('users'));
+    }
+
     public function show(string $name)
     {
         $user = User::where('name', $name)->first()->load(['articles.user', 'articles.likes', 'articles.tags']);

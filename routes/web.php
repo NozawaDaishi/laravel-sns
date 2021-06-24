@@ -10,6 +10,7 @@ Route::prefix('articles')->name('articles.')->group(function(){
 });
 Route::get('/tags/{name}', 'TagController@show')->name('tags.show');
 Route::prefix('users')->name('users.')->group(function () {
+    Route::get('/search', 'UserController@search')->name('search');
     Route::get('/{name}', 'UserController@show')->name('show');
     Route::get('/{name}/likes', 'UserController@likes')->name('likes');
     Route::get('/{name}/followings', 'UserController@followings')->name('followings');
@@ -19,3 +20,4 @@ Route::prefix('users')->name('users.')->group(function () {
         Route::delete('/{name}/follow', 'UserController@unfollow')->name('unfollow');
     });
 });
+
