@@ -88,7 +88,7 @@
                                             {{ $task->title }}
                                         </td>
                                         <td>
-                                            <span class="label">{{ $task->status_label }}</span>
+                                            <span class="badge {{ $task->status_class }}">{{ $task->status_label }}</span>
                                         </td>
                                         <td>
                                             {{ $task->due_date }}
