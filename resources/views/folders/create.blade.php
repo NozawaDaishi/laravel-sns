@@ -11,6 +11,7 @@
                 <div class="text-muted text-center font-weight-bold list-group-item list-group-item-action bg-light">
                     フォルダを追加する
                 </div>
+                @include('error_card_list')
                 <div class="card-body">
                 <form action="{{ route('folders.create') }}" method="post">
                     @csrf

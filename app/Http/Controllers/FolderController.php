@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Folder;
 use Illuminate\Http\Request;
+use App\Http\Requests\CreateFolder;
 
 class FolderController extends Controller
 {
@@ -12,7 +13,7 @@ class FolderController extends Controller
         return view('folders/create');
     }
 
-    public function store(Request $request)
+    public function store(CreateFolder $request)
     {
         $folder = new Folder();
 
