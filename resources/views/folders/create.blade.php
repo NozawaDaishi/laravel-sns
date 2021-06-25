@@ -17,7 +17,7 @@
                     @csrf
                     <div class="form-group">
                         <label for="title">フォルダ名</label>
-                        <input type="text" class="form-control" name="title" id="title" />
+                        <input type="text" class="form-control" name="title" id="title" required/>
                         </div>
                         <div class="text-right">
                         <button type="submit" class="btn btn-primary">作成</button>
