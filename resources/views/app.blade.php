@@ -13,6 +13,17 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
     <!-- Material Design Bootstrap -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.11/css/mdb.min.css" rel="stylesheet">
+    <style>
+    body {
+        height: 100%;
+        overflow-y: scroll;
+        -ms-overflow-style: none;    /* IE, Edge 対応 */
+        scrollbar-width: none;       /* Firefox 対応 */
+    }
+    body::-webkit-scrollbar {  /* Chrome, Safari 対応 */
+        display:none;
+    }
+    </style>
 </head>
 
 <body>
