@@ -5,7 +5,7 @@
 @section('content')
     @include('nav')
     <div class="container">
-        <div class="row">
+        <div class="row mt-5">
             <div id="modal-delete-{{ $current_folder_id }}" class="modal fade" tabindex="-1" role="dialog">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
@@ -35,7 +35,7 @@
             <div class="col col-md-4">
                 <div class="list-group card mt-5">
                     <div class="text-muted text-center font-weight-bold list-group-item list-group-item-action bg-light d-flex justify-content-between">
-                        フォルダー
+                        フォルダ
                         <div class="">
                             <div class="dropup">
                                 <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -43,11 +43,11 @@
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right" style="z-index: 99;">
                                     <a class="dropdown-item" href="">
-                                        <i class="fas fa-pen mr-1"></i>選択中のフォルダー名を編集する
+                                        <i class="fas fa-pen mr-1"></i>選択中のフォルダ名を編集する
                                     </a>
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item text-danger" data-toggle="modal" data-target="#modal-delete-{{ $current_folder_id }}">
-                                        <i class="fas fa-trash-alt mr-1"></i>選択中のフォルダーを削除する
+                                        <i class="fas fa-trash-alt mr-1"></i>選択中のフォルダを削除する
                                     </a>
                                 </div>
                             </div>
@@ -74,77 +74,77 @@
                                 タスクが登録されていません。
                             </div>
                         @else
-                        <table class="table text-center list-group-item list-group-item-action ">
-                            <thead>
-                                <tr>
-                                    <th >タイトル</th>
-                                    <th>状態</th>
-                                    <th>期限</th>
-                                    <th>重要度</th>
-                                    <th>緊急度</th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach($tasks as $task)
-                                    <div id="modal-delete-{{ $task->id }}" class="modal fade" tabindex="-1" role="dialog">
-                                        <div class="modal-dialog" role="document">
-                                            <div class="modal-content">
-                                            <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="閉じる">
-                                                <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                            <form method="POST" action="">
-                                                @csrf
-                                                @method('DELETE')
-                                                <div class="modal-body">
-                                                    {{ $task->title }}を削除します。よろしいですか？
+                            <table class="table text-center list-group-item list-group-item-action ">
+                                <thead>
+                                    <tr>
+                                        <th class="font-weight-bold">タイトル</th>
+                                        <th class="font-weight-bold">状態</th>
+                                        <th class="font-weight-bold">期限</th>
+                                        <th class="font-weight-bold">重要度</th>
+                                        <th class="font-weight-bold">緊急度</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach($tasks as $task)
+                                        <div id="modal-delete-{{ $task->id }}" class="modal fade" tabindex="-1" role="dialog">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="閉じる">
+                                                    <span aria-hidden="true">&times;</span>
+                                                    </button>
                                                 </div>
-                                                <div class="modal-footer justify-content-between">
-                                                <a class="btn btn-outline-grey" data-dismiss="modal">キャンセル</a>
-                                                <button type="submit" class="btn btn-danger">削除する</button>
+                                                <form method="POST" action="">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <div class="modal-body">
+                                                        {{ $task->title }}を削除します。よろしいですか？
+                                                    </div>
+                                                    <div class="modal-footer justify-content-between">
+                                                    <a class="btn btn-outline-grey" data-dismiss="modal">キャンセル</a>
+                                                    <button type="submit" class="btn btn-danger">削除する</button>
+                                                    </div>
+                                                </form>
                                                 </div>
-                                            </form>
                                             </div>
                                         </div>
-                                    </div>
-                                    <tr>
-                                        <td>
-                                            {{ $task->title }}
-                                        </td>
-                                        <td>
-                                            <h6><span class="badge {{ $task->status_class }}">{{ $task->status_badge }}</span></h6>
-                                        </td>
-                                        <td>
-                                            {{ $task->formatted_due_date }}
-                                        </td>
-                                        <td>
-                                            <h6><span class="badge {{ $task->important_class }}">{{ $task->important_badge }}</span></h6>
-                                        </td>
-                                        <td>
-                                            <h6><span class="badge {{ $task->urgent_class }}">{{ $task->urgent_badge }}</span></h6>
-                                        </td>
-                                        <td>
-                                            <div class="dropup">
-                                                <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <i class="fas fa-ellipsis-v"></i>
-                                                </a>
-                                                <div class="dropdown-menu dropdown-menu-right" style="z-index: 99;">
-                                                    <a class="dropdown-item" href="">
-                                                        <i class="fas fa-pen mr-1"></i>タスクを編集する
+                                        <tr>
+                                            <td>
+                                                {{ $task->title }}
+                                            </td>
+                                            <td>
+                                                <h6><span class="badge {{ $task->status_class }}">{{ $task->status_badge }}</span></h6>
+                                            </td>
+                                            <td>
+                                                {{ $task->formatted_due_date }}
+                                            </td>
+                                            <td>
+                                                <h6><span class="badge {{ $task->important_class }}">{{ $task->important_badge }}</span></h6>
+                                            </td>
+                                            <td>
+                                                <h6><span class="badge {{ $task->urgent_class }}">{{ $task->urgent_badge }}</span></h6>
+                                            </td>
+                                            <td>
+                                                <div class="dropup">
+                                                    <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <i class="fas fa-ellipsis-v"></i>
                                                     </a>
-                                                    <div class="dropdown-divider"></div>
-                                                    <a class="dropdown-item text-danger" data-toggle="modal" data-target="#modal-delete-{{ $task->id }}">
-                                                        <i class="fas fa-trash-alt mr-1"></i>タスクを削除する
-                                                    </a>
+                                                    <div class="dropdown-menu dropdown-menu-right" style="z-index: 99;">
+                                                        <a class="dropdown-item" href="">
+                                                            <i class="fas fa-pen mr-1"></i>タスクを編集する
+                                                        </a>
+                                                        <div class="dropdown-divider"></div>
+                                                        <a class="dropdown-item text-danger" data-toggle="modal" data-target="#modal-delete-{{ $task->id }}">
+                                                            <i class="fas fa-trash-alt mr-1"></i>タスクを削除する
+                                                        </a>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
                         @endif
 
                         <a href="#" class="text-muted text-center list-group-item list-group-item-action">
@@ -187,7 +187,7 @@
                         @endforeach
                     </div>
                     <div class="col col-md-3">
-                        <div class="list-group-item list-group-item-action text-center bg-secondary text-dark">
+                        <div class="list-group-item list-group-item-action text-center bg-warning text-dark">
                             B
                         </div>
                         <table class="table table-bordered text-center">
@@ -213,7 +213,7 @@
                         @endforeach
                     </div>
                     <div class="col col-md-3">
-                        <div class="list-group-item list-group-item-action text-center bg-warning text-dark">
+                        <div class="list-group-item list-group-item-action text-center bg-secondary text-dark">
                             C
                         </div>
                         <table class="table table-bordered text-center">
@@ -265,6 +265,9 @@
                         @endforeach
                     </div>
                 </div>
+                <a href="#" class="text-muted text-center list-group-item list-group-item-action">
+                    <i class="fas fa-plus-circle"></i>
+                </a>
             </div>
             <div class="list-group align-items-center">
                 <div class="card mb-5">
@@ -275,7 +278,7 @@
                         <thead>
                         <tr>
                             <th class="text-center bg-danger text-dark">A</th>
-                            <th class="text-center bg-secondary text-dark">B</th>
+                            <th class="text-center bg-warning text-dark">B</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -286,7 +289,7 @@
                         </tbody>
                         <thead>
                         <tr>
-                            <th class="text-center bg-warning text-dark">C</th>
+                            <th class="text-center bg-secondary text-dark">C</th>
                             <th class="text-center bg-info text-dark">D</th>
                         </tr>
                         </thead>
