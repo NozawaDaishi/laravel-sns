@@ -64,11 +64,16 @@
                 </div>
             </div>
             <div class="column col-md-8">
-                <div class="list-group align-items-center ">
-                    <div class="card mt-5">
+                <div class="list-group align-items-center">
+                    <div class="card mt-5 ">
                         <div class="text-muted text-center font-weight-bold list-group-item list-group-item-action bg-light">
                             タスク
                         </div>
+                        @if($tasks->isEmpty())
+                            <div class="text-muted text-center font-weight-bold list-group-item list-group-item-action">
+                                タスクが登録されていません。
+                            </div>
+                        @else
                         <table class="table text-center list-group-item list-group-item-action ">
                             <thead>
                                 <tr>
@@ -140,6 +145,7 @@
                                 @endforeach
                             </tbody>
                         </table>
+                        @endif
 
                         <a href="#" class="text-muted text-center list-group-item list-group-item-action">
                             <i class="fas fa-plus-circle"></i>
