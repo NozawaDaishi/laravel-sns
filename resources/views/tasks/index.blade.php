@@ -58,7 +58,7 @@
                             {{ $folder->title }}
                         </a>
                     @endforeach
-                    <a href="#" class="list-group-item list-group-item-action text-muted text-center">
+                    <a href="{{ route('folders.create') }}" class="list-group-item list-group-item-action text-muted text-center">
                         <i class="fas fa-plus-circle"></i>
                     </a>
                 </div>
