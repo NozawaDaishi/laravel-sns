@@ -63,7 +63,7 @@
                     </a>
                 </div>
             </div>
-            <div class="column col-md-8">
+            <div class="col col-md-8">
                 <div class="list-group align-items-center">
                     <div class="card mt-5 ">
                         <div class="text-muted text-center font-weight-bold list-group-item list-group-item-action bg-light">
