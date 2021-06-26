@@ -173,8 +173,8 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td><span class="badge badge-pill badge-danger">高</span></td>
-                                    <td><span class="badge badge-pill badge-danger">高</span></td>
+                                    <td><span class="badge badge-pill badge-danger">High</span></td>
+                                    <td><span class="badge badge-pill badge-danger">High</span></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -199,8 +199,8 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td><span class="badge badge-pill badge-danger">高</span></td>
-                                    <td><span class="badge badge-pill badge-info">低</span></td>
+                                    <td><span class="badge badge-pill badge-danger">High</span></td>
+                                    <td><span class="badge badge-pill badge-info">Low</span></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -225,8 +225,8 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td class="font-weight-bold"><span class="badge badge-pill badge-info">低</span></td>
-                                    <td class="font-weight-bold"><span class="badge badge-pill badge-danger">高</span></td>
+                                    <td class="font-weight-bold"><span class="badge badge-pill badge-info">Low</span></td>
+                                    <td class="font-weight-bold"><span class="badge badge-pill badge-danger">High</span></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -251,8 +251,8 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td><span class="badge badge-pill badge-info">低</span></td>
-                                    <td><span class="badge badge-pill badge-info">低</span></td>
+                                    <td><span class="badge badge-pill badge-info">Low</span></td>
+                                    <td><span class="badge badge-pill badge-info">Low</span></td>
                                 </tr>
                             </tbody>
                         </table>

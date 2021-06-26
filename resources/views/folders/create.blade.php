@@ -17,10 +17,10 @@
                             @csrf
                             <div class="form-group">
                                 <label for="title">フォルダ名</label>
-                                <input type="text" class="form-control" name="title" id="title" required/>
+                                <input type="text" class="form-control" name="title" id="title" value="{{ old('title') }}" required/>
                             </div>
                             <div class="text-right">
-                                <button type="submit" class="btn btn-primary">作成</button>
+                                <button type="submit" class="btn aqua-gradient">作成</button>
                             </div>
                         </form>
                     </div>
