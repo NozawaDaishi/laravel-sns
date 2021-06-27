@@ -47,4 +47,13 @@ class TaskController extends Controller
             'id' => $current_folder->id,
         ]);
     }
+
+    public function edit(int $id, int $task_id)
+    {
+        $task = Task::find($task_id);
+
+        return view('tasks.edit', [
+            'task' => $task,
+        ]);
+    }
 }
