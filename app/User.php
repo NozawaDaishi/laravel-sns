@@ -82,4 +82,9 @@ class User extends Authenticatable
     {
         return $this->followings->count();
     }
+
+    public function folders()
+    {
+        return $this->hasMany('App\Folder');
+    }
 }

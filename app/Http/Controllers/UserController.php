@@ -11,7 +11,7 @@ class UserController extends Controller
     {
         $search_text = $_GET['query'];
         $users = User::where('name', 'Like', '%' .$search_text. '%')->get();
-
+        session()->flash('flash_message', '検索結果：' . count($users) . '人');
         return view('users.search', compact('users'));
     }
 

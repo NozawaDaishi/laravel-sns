@@ -21,7 +21,7 @@
                 <a class="nav-link font-weight-bold" href="{{ route('articles.create') }}"><i class="fas fa-pen mr-1"></i>投稿する</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link font-weight-bold" href=""><i class="fas fa-tasks"></i>ToDo</a>
+                <a class="nav-link font-weight-bold" href="{{ route('tasks.index', ['id' => 1]) }}"><i class="fas fa-tasks"></i>ToDo</a>
             </li>
         @endauth
 
@@ -57,3 +57,11 @@
     </ul>
 
 </nav>
+@if (session('flash_message'))
+    <div class="flash_message alert alert-success alert-dismissible fade show m-3" role="alert">
+        <i class="fas fa-check mr-2"></i>{{ session('flash_message') }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+@endif

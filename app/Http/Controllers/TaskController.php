@@ -7,16 +7,23 @@ use App\Task;
 use Illuminate\Http\Request;
 use App\Http\Requests\CreateTask;
 use App\Http\Requests\EditTask;
+use Illuminate\Support\Facades\Auth;
 
 class TaskController extends Controller
 {
     public function index(int $id)
     {
-        $folders = Folder::all();
+        $user = Auth::user();
+        $folders = Auth::user()->folders()->get();
+        $folder = $user->folders()->first();
 
         $current_folder = Folder::find($id);
 
         $tasks = $current_folder->tasks()->get()->sortBy('due_date');
+
+        if (is_null($folder)) {
+            return redirect()->route('folders.create');
+        }
 
         return view('tasks/index', [
             'folders' => $folders,
@@ -43,7 +50,7 @@ class TaskController extends Controller
         $task->urgent = $request->urgent;
 
         $current_folder->tasks()->save($task);
-
+        session()->flash('flash_message', 'タスクを作成しました');
         return redirect()->route('tasks.index', [
             'id' => $current_folder->id,
         ]);
@@ -68,7 +75,7 @@ class TaskController extends Controller
         $task->important = $request->important;
         $task->urgent = $request->urgent;
         $task->save();
-
+        session()->flash('flash_message', 'タスクを更新しました');
         return redirect()->route('tasks.index', [
             'id' => $task->folder_id,
         ]);
@@ -78,6 +85,7 @@ class TaskController extends Controller
     {
         $task = Task::find($task_id);
         $task->delete();
+        session()->flash('flash_message', 'タスクを削除しました');
 
         return redirect()->route('tasks.index', [
             'id' => $task->folder_id,
