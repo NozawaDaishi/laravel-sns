@@ -147,7 +147,7 @@
                             </table>
                         @endif
 
-                        <a href="#" class="text-muted text-center list-group-item list-group-item-action">
+                        <a href="{{ route('tasks.create', ['id' => $current_folder_id]) }}" class="text-muted text-center list-group-item list-group-item-action">
                             <i class="fas fa-plus-circle"></i>
                         </a>
                     </div>
@@ -265,7 +265,7 @@
                         @endforeach
                     </div>
                 </div>
-                <a href="#" class="text-muted text-center list-group-item list-group-item-action">
+                <a href="{{ route('tasks.create', ['id' => $current_folder_id]) }}" class="text-muted text-center list-group-item list-group-item-action">
                     <i class="fas fa-plus-circle"></i>
                 </a>
             </div>
