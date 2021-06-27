@@ -73,4 +73,14 @@ class TaskController extends Controller
             'id' => $task->folder_id,
         ]);
     }
+
+    public function destroy(int $task_id)
+    {
+        $task = Task::find($task_id);
+        $task->delete();
+
+        return redirect()->route('tasks.index', [
+            'id' => $task->folder_id,
+        ]);
+    }
 }

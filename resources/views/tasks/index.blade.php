@@ -42,13 +42,18 @@
                                 <i class="fas fa-ellipsis-v"></i>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right" style="z-index: 99;">
-                                    <a class="dropdown-item" href="">
+                                    <a class="dropdown-item" href="{{ route('folders.edit', ['id' => $current_folder_id]) }}">
                                         <i class="fas fa-pen mr-1"></i>選択中のフォルダ名を編集する
                                     </a>
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item text-danger" data-toggle="modal" data-target="#modal-delete-{{ $current_folder_id }}">
                                         <i class="fas fa-trash-alt mr-1"></i>選択中のフォルダを削除する
                                     </a>
+                                    {{-- <form method="POST" action="{{ route('folders.destroy', [$current_folder_id]) }}">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger">削除する</button>
+                                    </form> --}}
                                 </div>
                             </div>
                         </div>
@@ -87,28 +92,6 @@
                                 </thead>
                                 <tbody>
                                     @foreach($tasks as $task)
-                                        <div id="modal-delete-{{ $task->id }}" class="modal fade" tabindex="-1" role="dialog">
-                                            <div class="modal-dialog" role="document">
-                                                <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="閉じる">
-                                                    <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <form method="POST" action="">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <div class="modal-body">
-                                                        {{ $task->title }}を削除します。よろしいですか？
-                                                    </div>
-                                                    <div class="modal-footer justify-content-between">
-                                                    <a class="btn btn-outline-grey" data-dismiss="modal">キャンセル</a>
-                                                    <button type="submit" class="btn btn-danger">削除する</button>
-                                                    </div>
-                                                </form>
-                                                </div>
-                                            </div>
-                                        </div>
                                         <tr>
                                             <td>
                                                 {{ $task->title }}
@@ -135,9 +118,11 @@
                                                             <i class="fas fa-pen mr-1"></i>タスクを編集する
                                                         </a>
                                                         <div class="dropdown-divider"></div>
-                                                        <a class="dropdown-item text-danger" data-toggle="modal" data-target="#modal-delete-{{ $task->id }}">
-                                                            <i class="fas fa-trash-alt mr-1"></i>タスクを削除する
-                                                        </a>
+                                                        <form method="POST" action="{{ route('tasks.destroy', [$task->id]) }}" name="task_delete">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <a class="dropdown-item text-danger" href="#" onclick="document.task_delete.submit();"><i class="fas fa-trash-alt mr-1"></i>タスクを削除する</a>
+                                                        </form>
                                                     </div>
                                                 </div>
                                             </td>
