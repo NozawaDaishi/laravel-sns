@@ -131,7 +131,7 @@
                                                     <i class="fas fa-ellipsis-v"></i>
                                                     </a>
                                                     <div class="dropdown-menu dropdown-menu-right" style="z-index: 99;">
-                                                        <a class="dropdown-item" href="">
+                                                        <a class="dropdown-item" href="{{ route('tasks.edit', ['id' => $task->folder_id, 'task_id' => $task->id]) }}">
                                                             <i class="fas fa-pen mr-1"></i>タスクを編集する
                                                         </a>
                                                         <div class="dropdown-divider"></div>
@@ -180,8 +180,8 @@
                         </table>
                         @foreach($tasks as $task)
                             @if($task->important === 2 && $task->urgent === 2)
-                                <a href="" class="list-group-item list-group-item-action text-center">
-                                    {{ $task->title }}
+                                <a href="" class="list-group-item list-group-item-action text-left">
+                                    <span class="badge {{ $task->status_class }} mr-2">{{ $task->status_badge }}</span>{{ $task->title }}
                                 </a>
                             @endif
                         @endforeach
@@ -206,8 +206,8 @@
                         </table>
                         @foreach($tasks as $task)
                             @if($task->important === 2 && $task->urgent === 1)
-                                <a href="" class="list-group-item list-group-item-action text-center">
-                                    {{ $task->title }}
+                                <a href="" class="list-group-item list-group-item-action text-left">
+                                    <span class="badge {{ $task->status_class }} mr-2">{{ $task->status_badge }}</span>{{ $task->title }}
                                 </a>
                             @endif
                         @endforeach
@@ -232,8 +232,8 @@
                         </table>
                         @foreach($tasks as $task)
                             @if($task->important === 1 && $task->urgent === 2)
-                                <a href="" class="list-group-item list-group-item-action text-center">
-                                    {{ $task->title }}
+                                <a href="" class="list-group-item list-group-item-action text-left">
+                                    <span class="badge {{ $task->status_class }} mr-2">{{ $task->status_badge }}</span>{{ $task->title }}
                                 </a>
                             @endif
                         @endforeach
@@ -258,8 +258,8 @@
                         </table>
                         @foreach($tasks as $task)
                             @if($task->important === 1 && $task->urgent === 1)
-                                <a href="" class="list-group-item list-group-item-action text-center">
-                                    {{ $task->title }}
+                                <a href="" class="list-group-item list-group-item-action text-left">
+                                    <span class="badge {{ $task->status_class }} mr-2">{{ $task->status_badge }}</span>{{ $task->title }}
                                 </a>
                             @endif
                         @endforeach

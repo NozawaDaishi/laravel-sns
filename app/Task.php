@@ -14,13 +14,13 @@ class Task extends Model
     ];
 
     const IMPORTANT = [
-        1 => [ 'badge' => '低', 'class' => 'badge-pill badge-info' ],
-        2 => [ 'badge' => '高', 'class' => 'badge-pill badge-danger' ],
+        1 => [ 'badge' => 'Low', 'class' => 'badge-pill badge-info' ],
+        2 => [ 'badge' => 'High', 'class' => 'badge-pill badge-danger' ],
     ];
 
     const URGENT = [
-        1 => [ 'badge' => '低', 'class' => 'badge-pill badge-info' ],
-        2 => [ 'badge' => '高', 'class' => 'badge-pill badge-danger' ],
+        1 => [ 'badge' => 'Low', 'class' => 'badge-pill badge-info' ],
+        2 => [ 'badge' => 'High', 'class' => 'badge-pill badge-danger' ],
     ];
 
     public function getStatusBadgeAttribute()
