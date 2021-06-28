@@ -21,7 +21,7 @@
                 <a class="nav-link font-weight-bold" href="{{ route('articles.create') }}"><i class="fas fa-pen mr-1"></i>投稿する</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link font-weight-bold" href="{{ route('tasks.index', ['id' => 1]) }}"><i class="fas fa-tasks"></i>ToDo</a>
+                <a class="nav-link font-weight-bold" href="{{ route('tasks.index', ['id' => \Auth::user()->folders->min()]) }}"><i class="fas fa-tasks"></i>ToDo</a>
             </li>
         @endauth
 

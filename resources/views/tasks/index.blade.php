@@ -6,32 +6,32 @@
     @include('nav')
     <div class="container">
         <div class="row mt-5">
-            <div id="modal-delete-{{ $current_folder_id }}" class="modal fade" tabindex="-1" role="dialog">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="閉じる">
-                        <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <form method="POST" action="">
-                        @csrf
-                        @method('DELETE')
-                        <div class="modal-body">
-                            @foreach($folders as $folder)
-                                @if($current_folder_id === $folder->id)
-                                    {{ $folder->title }}を削除します。よろしいですか？
-                                @endif
-                            @endforeach
+                <div id="modal-delete-{{ $current_folder_id }}" class="modal fade" tabindex="-1" role="dialog">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="閉じる">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
                         </div>
-                        <div class="modal-footer justify-content-between">
-                        <a class="btn btn-outline-grey" data-dismiss="modal">キャンセル</a>
-                        <button type="submit" class="btn btn-danger">削除する</button>
+                        <form method="POST" action="{{ route('folders.destroy', [$current_folder_id]) }}">
+                            @csrf
+                            @method('DELETE')
+                            <div class="modal-body">
+                                @foreach($folders as $folder)
+                                    @if($current_folder_id === $folder->id)
+                                        {{ $folder->title }}を削除します。よろしいですか？
+                                    @endif
+                                @endforeach
+                            </div>
+                            <div class="modal-footer justify-content-between">
+                            <a class="btn btn-outline-grey" data-dismiss="modal">キャンセル</a>
+                            <button type="submit" class="btn btn-danger">削除する</button>
+                            </div>
+                        </form>
                         </div>
-                    </form>
                     </div>
                 </div>
-            </div>
             <div class="col col-md-4">
                 <div class="list-group card mt-5">
                     <div class="text-muted text-center font-weight-bold list-group-item list-group-item-action bg-light d-flex justify-content-between">
@@ -49,11 +49,6 @@
                                     <a class="dropdown-item text-danger" data-toggle="modal" data-target="#modal-delete-{{ $current_folder_id }}">
                                         <i class="fas fa-trash-alt mr-1"></i>選択中のフォルダを削除する
                                     </a>
-                                    {{-- <form method="POST" action="{{ route('folders.destroy', [$current_folder_id]) }}">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-danger">削除する</button>
-                                    </form> --}}
                                 </div>
                             </div>
                         </div>
@@ -118,7 +113,7 @@
                                                             <i class="fas fa-pen mr-1"></i>タスクを編集する
                                                         </a>
                                                         <div class="dropdown-divider"></div>
-                                                        <form method="POST" action="{{ route('tasks.destroy', [$task->id]) }}" name="task_delete">
+                                                        <form method="POST" action="{{ route('tasks.destroy', ['task' => $task]) }}" name="task_delete">
                                                             @csrf
                                                             @method('DELETE')
                                                             <a class="dropdown-item text-danger" href="#" onclick="document.task_delete.submit();"><i class="fas fa-trash-alt mr-1"></i>タスクを削除する</a>

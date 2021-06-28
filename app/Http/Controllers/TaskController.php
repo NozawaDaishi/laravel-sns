@@ -27,6 +27,7 @@ class TaskController extends Controller
 
         return view('tasks/index', [
             'folders' => $folders,
+            'id' => $folder->id,
             'current_folder_id' => $id,
             'tasks' => $tasks,
         ]);
@@ -83,7 +84,7 @@ class TaskController extends Controller
 
     public function destroy(int $task_id)
     {
-        $task = Task::find($task_id);
+        $task = \App\Task::find($task_id);
         $task->delete();
         session()->flash('flash_message', 'タスクを削除しました');
 

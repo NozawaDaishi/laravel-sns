@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Folder;
+use App\Task;
 use Illuminate\Http\Request;
 use App\Http\Requests\CreateFolder;
 use App\Http\Requests\EditFolder;
@@ -49,16 +50,16 @@ class FolderController extends Controller
         ]);
     }
 
-    // public function destroy(int $id)
-    // {
-    //     $folder = Folder::find($id);
+    public function destroy(int $id)
+    {
+        $folder = Folder::find($id);
+        $tasks = Task::all();
+        $folder->delete();
 
-    //     $folder->delete();
-
-    //     $folder_first = Folder::all()->first();
-
-    //     return redirect()->route('tasks.index', [
-    //         'id' => $folder_first->id,
-    //     ]);
-    // }
+        $folder_first = Folder::all()->first();
+        session()->flash('flash_message', 'フォルダ名を削除しました');
+        return redirect()->route('tasks.index', [
+            'id' => $folder_first->id,
+        ]);
+    }
 }

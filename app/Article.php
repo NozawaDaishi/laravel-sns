@@ -39,4 +39,9 @@ class Article extends Model
     {
         return $this->belongsToMany('App\Tag')->withTimestamps();
     }
+
+    public function tasks(): HasMany
+    {
+        return $this->hasMany('App\Task')->withTimestamps();
+    }
 }
