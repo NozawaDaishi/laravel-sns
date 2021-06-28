@@ -113,10 +113,10 @@
                                                             <i class="fas fa-pen mr-1"></i>タスクを編集する
                                                         </a>
                                                         <div class="dropdown-divider"></div>
-                                                        <form method="POST" action="{{ route('tasks.destroy', ['task' => $task]) }}" name="task_delete">
+                                                        <a class="dropdown-item text-danger" onclick="document.getElementById('delete-form').submit();"><i class="fas fa-trash-alt mr-1"></i>タスクを削除する</a>
+                                                        <form method="POST" action="{{ route('tasks.destroy', ['task' => $task]) }}" id="delete-form">
                                                             @csrf
                                                             @method('DELETE')
-                                                            <a class="dropdown-item text-danger" onclick="document.task_delete.submit();"><i class="fas fa-trash-alt mr-1"></i>タスクを削除する</a>
                                                         </form>
                                                     </div>
                                                 </div>
