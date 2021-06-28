@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Article;
 use App\Tag;
+use App\Folder;
 use App\Task;
 use App\Http\Requests\ArticleRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ArticleController extends Controller
 {
@@ -17,8 +19,12 @@ class ArticleController extends Controller
     public function index()
     {
         $articles = Article::all()->sortByDesc('created_at')->load(['user', 'likes', 'tags']);
+        $tasks = Folder::where('user_id',Auth::user()->id)->get();
 
-        return view('articles.index', ['articles' => $articles]);
+        return view('articles.index', [
+            'articles' => $articles,
+            'tasks' => $tasks,
+        ]);
     }
 
     public function create()

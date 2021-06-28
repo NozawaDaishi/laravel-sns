@@ -5,6 +5,8 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Carbon\Carbon;
 
 class Article extends Model
 {
@@ -43,5 +45,15 @@ class Article extends Model
     public function tasks(): HasMany
     {
         return $this->hasMany('App\Task')->withTimestamps();
+    }
+
+    public function folders(): HasMany
+    {
+        return $this->hasMany('App\Folder')->withTimestamps();
+    }
+
+    public function getFormattedCreatedAtAttribute()
+    {
+        return Carbon::createFromFormat('Y-m-d H:i:s', $this->attributes['created_at'])->format('Y/m/d');
     }
 }

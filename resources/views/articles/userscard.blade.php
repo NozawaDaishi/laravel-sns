@@ -95,40 +95,4 @@
             </div>
         @endif
     @endforeach
-    <table class="table text-center list-group-item list-group-item-action ">
-        <thead>
-            <tr>
-                <th class="font-weight-bold">タイトル</th>
-                <th class="font-weight-bold">状態</th>
-                <th class="font-weight-bold">期限</th>
-                <th class="font-weight-bold">重要度</th>
-                <th class="font-weight-bold">緊急度</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach($tasks as $task)
-                @foreach($task->tasks as $item)
-                    @if($item->formatted_due_date === $article->formatted_created_at)
-                        <tr>
-                            <td>
-                                {{ $item->title }}
-                            </td>
-                            <td>
-                                <h6><span class="badge {{ $item->status_class }}">{{ $item->status_badge }}</span></h6>
-                            </td>
-                            <td>
-                                {{ $item->formatted_due_date }}
-                            </td>
-                            <td>
-                                <h6><span class="badge {{ $item->important_class }}">{{ $item->important_badge }}</span></h6>
-                            </td>
-                            <td>
-                                <h6><span class="badge {{ $item->urgent_class }}">{{ $item->urgent_badge }}</span></h6>
-                            </td>
-                        </tr>
-                    @endif
-                @endforeach
-            @endforeach
-        </tbody>
-    </table>
 </div>

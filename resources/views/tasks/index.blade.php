@@ -116,7 +116,7 @@
                                                         <form method="POST" action="{{ route('tasks.destroy', ['task' => $task]) }}" name="task_delete">
                                                             @csrf
                                                             @method('DELETE')
-                                                            <a class="dropdown-item text-danger" href="#" onclick="document.task_delete.submit();"><i class="fas fa-trash-alt mr-1"></i>タスクを削除する</a>
+                                                            <a class="dropdown-item text-danger" onclick="document.task_delete.submit();"><i class="fas fa-trash-alt mr-1"></i>タスクを削除する</a>
                                                         </form>
                                                     </div>
                                                 </div>
