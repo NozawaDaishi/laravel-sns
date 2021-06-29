@@ -19,11 +19,11 @@ class ArticleController extends Controller
     public function index()
     {
         $articles = Article::all()->sortByDesc('created_at')->load(['user', 'likes', 'tags']);
-        $tasks = Folder::where('user_id',Auth::user()->id)->get();
+        $folders = Folder::where('user_id',Auth::user()->id)->get();
 
         return view('articles.index', [
             'articles' => $articles,
-            'tasks' => $tasks,
+            'folders' => $folders,
         ]);
     }
 

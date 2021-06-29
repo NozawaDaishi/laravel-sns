@@ -107,38 +107,36 @@
             </tr>
         </thead>
         <tbody>
-            {{ $counter = 0; }}
-            @foreach($tasks as $task)
-                @foreach($task->tasks as $item)
-                    @if($item->formatted_due_date === $article->formatted_created_at)
-                        {{ $counter++; }}
-                        @if($counter==0)
-                            <tr>
-                                <td colspan="5">
-                                    期限が{{$item->formatted_due_date}}のタスクがありません
-                                </td>
-                            </tr>
-                        @else
+            @foreach($folders as $folder)
+                @if($folder->tasks->isEmpty())
+                    <tr>
+                        <td colspan="5">
+                            期限のタスクはありません
+                        </td>
+                    </tr>
+                @else
+                    @foreach( $folder->tasks as $task)
+                        @if($task->formatted_due_date === $article->formatted_created_at)
                             <tr>
                                 <td>
-                                    {{ $item->title }}
+                                    {{ $task->title }}
                                 </td>
                                 <td>
-                                    <h6><span class="badge {{ $item->status_class }}">{{ $item->status_badge }}</span></h6>
+                                    <h6><span class="badge {{ $task->status_class }}">{{ $task->status_badge }}</span></h6>
                                 </td>
                                 <td>
-                                    {{ $item->formatted_due_date }}
+                                    {{ $task->formatted_due_date }}
                                 </td>
                                 <td>
-                                    <h6><span class="badge {{ $item->important_class }}">{{ $item->important_badge }}</span></h6>
+                                    <h6><span class="badge {{ $task->important_class }}">{{ $task->important_badge }}</span></h6>
                                 </td>
                                 <td>
-                                    <h6><span class="badge {{ $item->urgent_class }}">{{ $item->urgent_badge }}</span></h6>
+                                    <h6><span class="badge {{ $task->urgent_class }}">{{ $task->urgent_badge }}</span></h6>
                                 </td>
                             </tr>
                         @endif
-                    @endif
-                @endforeach
+                    @endforeach
+                @endif
             @endforeach
         </tbody>
     </table>
