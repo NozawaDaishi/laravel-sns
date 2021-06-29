@@ -128,12 +128,15 @@
                             </td>
                         </tr>
                     @else
-                        <tr>
-                            <td colspan="5">
-                                <span class="font-weight-normal">{{ $article->formatted_created_at }}</span>が期限のタスクはありません
-                            </td>
-                        </tr>
-                        @break
+
+                        @if($task === end($tasks))
+                                <tr>
+                                    <td colspan="5">
+                                        <span class="font-weight-normal">{{ $article->formatted_created_at }}</span>が期限のタスクはありません
+                                    </td>
+                                </tr>
+                        @endif
+
                     @endif
                 @endif
             @endforeach
