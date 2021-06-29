@@ -245,9 +245,9 @@
                         @endforeach
                     </div>
                 </div>
-                <a href="{{ route('tasks.create', ['id' => $current_folder_id]) }}" class="text-muted text-center list-group-item list-group-item-action">
+                {{-- <a href="{{ route('tasks.create', ['id' => $current_folder_id]) }}" class="text-muted text-center list-group-item list-group-item-action">
                     <i class="fas fa-plus-circle"></i>
-                </a>
+                </a> --}}
             </div>
             <div class="list-group align-items-center">
                 <div class="card mb-5">
