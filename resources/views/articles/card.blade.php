@@ -107,13 +107,37 @@
             </tr>
         </thead>
         <tbody>
-            @foreach($folders as $folder)
+            @foreach( $tasks as $task)
+                @if($task->user_id === $article->user_id)
+                    @if($task->formatted_due_date === $article->formatted_created_at)
+                        <tr>
+                            <td>
+                                {{ $task->title }}
+                            </td>
+                            <td>
+                                <h6><span class="badge {{ $task->status_class }}">{{ $task->status_badge }}</span></h6>
+                            </td>
+                            <td>
+                                {{ $task->formatted_due_date }}
+                            </td>
+                            <td>
+                                <h6><span class="badge {{ $task->important_class }}">{{ $task->important_badge }}</span></h6>
+                            </td>
+                            <td>
+                                <h6><span class="badge {{ $task->urgent_class }}">{{ $task->urgent_badge }}</span></h6>
+                            </td>
+                        </tr>
+                    @endif
+                @endif
+            @endforeach
+            {{-- @foreach($folders as $folder)
                 @if($folder->tasks->isEmpty())
                     <tr>
                         <td colspan="5">
-                            期限のタスクはありません
+                            <span class="font-weight-normal">{{ $article->formatted_created_at }}</span>が期限のタスクはありません
                         </td>
                     </tr>
+                    @break
                 @else
                     @foreach( $folder->tasks as $task)
                         @if($task->formatted_due_date === $article->formatted_created_at)
@@ -137,7 +161,7 @@
                         @endif
                     @endforeach
                 @endif
-            @endforeach
+            @endforeach --}}
         </tbody>
     </table>
 </div>

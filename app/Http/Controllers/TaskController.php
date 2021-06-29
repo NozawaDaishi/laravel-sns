@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Folder;
 use App\Task;
 use App\Article;
+use App\User;
 use Illuminate\Http\Request;
 use App\Http\Requests\CreateTask;
 use App\Http\Requests\EditTask;
@@ -14,17 +15,16 @@ class TaskController extends Controller
 {
     public function index(int $id)
     {
-        $folder = Folder::find($id);
+        $current_folder = Folder::find($id);
 
-        if (Auth::user()->id !== $folder->user_id) {
+        if (Auth::user()->id !== $current_folder->user_id) {
             abort(403);
         }
 
         $user = Auth::user();
         $folders = Auth::user()->folders()->get();
-        // $folder = $user->folders()->first();
 
-        $current_folder = Folder::find($id);
+        $folder = $user->folders()->first();
 
         $tasks = $current_folder->tasks()->get()->sortBy('due_date');
 
@@ -50,13 +50,16 @@ class TaskController extends Controller
     public function store(int $id, CreateTask $request)
     {
         $current_folder = Folder::find($id);
+        $current_user = Auth::user()->id;
 
         $task = new Task();
         $task->title = $request->title;
         $task->due_date = $request->due_date;
         $task->important = $request->important;
         $task->urgent = $request->urgent;
-        $current_folder->tasks()->save($task);
+        $task->folder_id = $current_folder->id;
+        $task->user_id = $current_user;
+        $task->save();
         session()->flash('flash_color', 'alert-success');
         session()->flash('flash_icon', 'fas fa-clipboard-check mr-2 fa-lg');
         session()->flash('flash_message', 'タスクを作成しました');

@@ -6,6 +6,7 @@ use App\Article;
 use App\Tag;
 use App\Folder;
 use App\Task;
+use App\User;
 use App\Http\Requests\ArticleRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,14 +17,28 @@ class ArticleController extends Controller
     {
         $this->authorizeResource(Article::class, 'article');
     }
-    public function index()
+    public function index(Request $request)
     {
-        $articles = Article::all()->sortByDesc('created_at')->load(['user', 'likes', 'tags']);
+        // $articles = Article::all()->sortByDesc('created_at')->load(['user', 'likes', 'tags']);
+
+        $articles = $request->user()
+            ? $request->user()->followings
+                ->map(function ($following) {
+                    return $following->articles->load(['user', 'likes', 'tags']);
+                })
+                ->push($request->user()->articles->load(['user', 'likes', 'tags'])) // 自分自身の記事を追加
+                ->flatten()
+                ->sortByDesc('created_at')
+            : collect();
         $folders = Folder::where('user_id', Auth::user()->id)->get();
+
+        $tasks = Task::all();
+        // $tasks = Task::where('user_id', User::user()->id)->get();
 
         return view('articles.index', [
             'articles' => $articles,
             'folders' => $folders,
+            'tasks' => $tasks,
         ]);
     }
 
