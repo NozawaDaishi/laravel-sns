@@ -8,7 +8,7 @@
         @include('users.user')
         @include('users.tabs', ['hasArticles' => true, 'hasLikes' => false])
         @foreach($articles as $article)
-            @include('articles.userscard')
+            @include('articles.card')
         @endforeach
     </div>
 @endsection

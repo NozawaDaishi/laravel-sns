@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Task;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -11,6 +12,8 @@ class UserController extends Controller
     {
         $search_text = $_GET['query'];
         $users = User::where('name', 'Like', '%' .$search_text. '%')->get();
+        session()->flash('flash_color', 'alert-success');
+        session()->flash('flash_icon', 'fas fa-users mr-2 fa-lg');
         session()->flash('flash_message', '検索結果：' . count($users) . '人');
         return view('users.search', compact('users'));
     }
@@ -21,9 +24,12 @@ class UserController extends Controller
 
         $articles = $user->articles->sortByDesc('created_at');
 
+        $tasks = Task::all();
+
         return view('users.show', [
             'user' => $user,
             'articles' => $articles,
+            'tasks' => $tasks,
         ]);
     }
 
