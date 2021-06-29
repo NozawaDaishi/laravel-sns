@@ -48,7 +48,9 @@ class ArticleController extends Controller
             $tag = Tag::firstOrCreate(['name' => $tagName]);
             $article->tags()->attach($tag);
         });
-        session()->flash('flash_message', '投稿が完了しました');
+        session()->flash('flash_color', 'alert-success');
+        session()->flash('flash_icon', 'fas fa-check mr-2 fa-lg');
+        session()->flash('flash_message', '投稿しました');
         return redirect()->route('articles.index');
     }
 
@@ -78,6 +80,8 @@ class ArticleController extends Controller
             $tag = Tag::firstOrCreate(['name' => $tagName]);
             $article->tags()->attach($tag);
         });
+        session()->flash('flash_color', 'alert-success');
+        session()->flash('flash_icon', 'fas fa-edit mr-2 fa-lg');
         session()->flash('flash_message', '投稿を更新しました');
         return redirect()->route('articles.index');
     }
@@ -85,6 +89,8 @@ class ArticleController extends Controller
     public function destroy(Article $article)
     {
         $article->delete();
+        session()->flash('flash_color', 'alert-danger');
+        session()->flash('flash_icon', 'fas fa-backspace mr-2 fa-lg');
         session()->flash('flash_message', '投稿を削除しました');
         return redirect()->route('articles.index');
     }

@@ -23,6 +23,8 @@ class FolderController extends Controller
         $folder->title = $request->title;
 
         Auth::user()->folders()->save($folder);
+        session()->flash('flash_color', 'alert-success');
+        session()->flash('flash_icon', 'fas fa-folder-plus mr-2 fa-lg');
         session()->flash('flash_message', 'フォルダを作成しました');
         return redirect()->route('tasks.index', [
             'id' => $folder->id,
@@ -44,6 +46,8 @@ class FolderController extends Controller
 
         $folder->title = $request->title;
         $folder->save();
+        session()->flash('flash_color', 'alert-success');
+        session()->flash('flash_icon', 'fas fa-edit mr-2 fa-lg');
         session()->flash('flash_message', 'フォルダ名を変更しました');
         return redirect()->route('tasks.index', [
             'id' => $folder->id,
@@ -57,7 +61,14 @@ class FolderController extends Controller
         $folder->delete();
 
         $folder_first = Folder::all()->first();
-        session()->flash('flash_message', 'フォルダ名を削除しました');
+        session()->flash('flash_color', 'alert-danger');
+        session()->flash('flash_icon', 'fas fa-folder-minus mr-2 fa-lg');
+        session()->flash('flash_message', 'フォルダを削除しました');
+
+        if (is_null($folder_first)) {
+            return redirect()->route('folders.create');
+        }
+
         return redirect()->route('tasks.index', [
             'id' => $folder_first->id,
         ]);

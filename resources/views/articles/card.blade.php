@@ -1,4 +1,5 @@
-<div class="card mt-3">
+<div class="row">
+<div class="card mt-3 col">
     <div class="card-body d-flex flex-row">
         <a href="{{ route('users.show', ['name' => $article->user->name]) }}" class="text-dark">
             <i class="fas fa-user-circle fa-3x mr-1"></i>
@@ -95,7 +96,7 @@
             </div>
         @endif
     @endforeach
-    <table class="table text-center list-group-item list-group-item-action ">
+    <table class="table text-center">
         <thead>
             <tr>
                 <th class="font-weight-bold">タイトル</th>
@@ -106,29 +107,40 @@
             </tr>
         </thead>
         <tbody>
+            {{ $counter = 0; }}
             @foreach($tasks as $task)
                 @foreach($task->tasks as $item)
                     @if($item->formatted_due_date === $article->formatted_created_at)
-                        <tr>
-                            <td>
-                                {{ $item->title }}
-                            </td>
-                            <td>
-                                <h6><span class="badge {{ $item->status_class }}">{{ $item->status_badge }}</span></h6>
-                            </td>
-                            <td>
-                                {{ $item->formatted_due_date }}
-                            </td>
-                            <td>
-                                <h6><span class="badge {{ $item->important_class }}">{{ $item->important_badge }}</span></h6>
-                            </td>
-                            <td>
-                                <h6><span class="badge {{ $item->urgent_class }}">{{ $item->urgent_badge }}</span></h6>
-                            </td>
-                        </tr>
+                        {{ $counter++; }}
+                        @if($counter==0)
+                            <tr>
+                                <td colspan="5">
+                                    期限が{{$item->formatted_due_date}}のタスクがありません
+                                </td>
+                            </tr>
+                        @else
+                            <tr>
+                                <td>
+                                    {{ $item->title }}
+                                </td>
+                                <td>
+                                    <h6><span class="badge {{ $item->status_class }}">{{ $item->status_badge }}</span></h6>
+                                </td>
+                                <td>
+                                    {{ $item->formatted_due_date }}
+                                </td>
+                                <td>
+                                    <h6><span class="badge {{ $item->important_class }}">{{ $item->important_badge }}</span></h6>
+                                </td>
+                                <td>
+                                    <h6><span class="badge {{ $item->urgent_class }}">{{ $item->urgent_badge }}</span></h6>
+                                </td>
+                            </tr>
+                        @endif
                     @endif
                 @endforeach
             @endforeach
         </tbody>
     </table>
+</div>
 </div>

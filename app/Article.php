@@ -42,11 +42,6 @@ class Article extends Model
         return $this->belongsToMany('App\Tag')->withTimestamps();
     }
 
-    public function tasks(): HasMany
-    {
-        return $this->hasMany('App\Task')->withTimestamps();
-    }
-
     public function folders(): HasMany
     {
         return $this->hasMany('App\Folder')->withTimestamps();

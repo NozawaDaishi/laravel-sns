@@ -26,7 +26,12 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    protected function redirectTo() {
+        session()->flash('flash_color', 'alert-success');
+        session()->flash('flash_icon', 'fas fa-user-check mr-2 fa-lg');
+        session()->flash('flash_message', 'ログインしました');
+        return '/';
+    }
 
     /**
      * Create a new controller instance.

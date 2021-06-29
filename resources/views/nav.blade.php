@@ -21,7 +21,11 @@
                 <a class="nav-link font-weight-bold" href="{{ route('articles.create') }}"><i class="fas fa-pen mr-1"></i>投稿する</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link font-weight-bold" href="{{ route('tasks.index', ['id' => \Auth::user()->folders->min()]) }}"><i class="fas fa-tasks"></i>ToDo</a>
+                @if(\Auth::user()->folders->isEmpty())
+                    <a class="nav-link font-weight-bold" href="{{ route('folders.create') }}"><i class="fas fa-tasks"></i>ToDo</a>
+                @else
+                    <a class="nav-link font-weight-bold" href="{{route('tasks.index', ['id' => \Auth::user()->folders->min()]) }}"><i class="fas fa-tasks"></i>ToDo</a>
+                @endif
             </li>
         @endauth
 
@@ -58,8 +62,8 @@
 
 </nav>
 @if (session('flash_message'))
-    <div class="flash_message alert alert-success alert-dismissible fade show m-3" role="alert">
-        <i class="fas fa-check mr-2"></i>{{ session('flash_message') }}
+    <div class="flash_message alert {{ session('flash_color') }} alert-dismissible fade show m-3" role="alert">
+        <i class="{{ session('flash_icon') }}"></i>{{ session('flash_message') }}
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>

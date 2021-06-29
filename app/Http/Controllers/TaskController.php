@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Folder;
 use App\Task;
+use App\Article;
 use Illuminate\Http\Request;
 use App\Http\Requests\CreateTask;
 use App\Http\Requests\EditTask;
@@ -49,8 +50,9 @@ class TaskController extends Controller
         $task->due_date = $request->due_date;
         $task->important = $request->important;
         $task->urgent = $request->urgent;
-
         $current_folder->tasks()->save($task);
+        session()->flash('flash_color', 'alert-success');
+        session()->flash('flash_icon', 'fas fa-clipboard-check mr-2 fa-lg');
         session()->flash('flash_message', 'タスクを作成しました');
         return redirect()->route('tasks.index', [
             'id' => $current_folder->id,
@@ -76,6 +78,8 @@ class TaskController extends Controller
         $task->important = $request->important;
         $task->urgent = $request->urgent;
         $task->save();
+        session()->flash('flash_color', 'alert-success');
+        session()->flash('flash_icon', 'fas fa-edit mr-2 fa-lg');
         session()->flash('flash_message', 'タスクを更新しました');
         return redirect()->route('tasks.index', [
             'id' => $task->folder_id,
@@ -86,6 +90,8 @@ class TaskController extends Controller
     {
         $task = \App\Task::find($task_id);
         $task->delete();
+        session()->flash('flash_color', 'alert-danger');
+        session()->flash('flash_icon', 'fas fa-trash-alt mr-2 fa-lg');
         session()->flash('flash_message', 'タスクを削除しました');
 
         return redirect()->route('tasks.index', [
