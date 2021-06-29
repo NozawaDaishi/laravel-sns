@@ -127,41 +127,16 @@
                                 <h6><span class="badge {{ $task->urgent_class }}">{{ $task->urgent_badge }}</span></h6>
                             </td>
                         </tr>
+                    @else
+                        <tr>
+                            <td colspan="5">
+                                <span class="font-weight-normal">{{ $article->formatted_created_at }}</span>が期限のタスクはありません
+                            </td>
+                        </tr>
+                        @break
                     @endif
                 @endif
             @endforeach
-            {{-- @foreach($folders as $folder)
-                @if($folder->tasks->isEmpty())
-                    <tr>
-                        <td colspan="5">
-                            <span class="font-weight-normal">{{ $article->formatted_created_at }}</span>が期限のタスクはありません
-                        </td>
-                    </tr>
-                    @break
-                @else
-                    @foreach( $folder->tasks as $task)
-                        @if($task->formatted_due_date === $article->formatted_created_at)
-                            <tr>
-                                <td>
-                                    {{ $task->title }}
-                                </td>
-                                <td>
-                                    <h6><span class="badge {{ $task->status_class }}">{{ $task->status_badge }}</span></h6>
-                                </td>
-                                <td>
-                                    {{ $task->formatted_due_date }}
-                                </td>
-                                <td>
-                                    <h6><span class="badge {{ $task->important_class }}">{{ $task->important_badge }}</span></h6>
-                                </td>
-                                <td>
-                                    <h6><span class="badge {{ $task->urgent_class }}">{{ $task->urgent_badge }}</span></h6>
-                                </td>
-                            </tr>
-                        @endif
-                    @endforeach
-                @endif
-            @endforeach --}}
         </tbody>
     </table>
 </div>

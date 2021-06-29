@@ -32,13 +32,15 @@ class ArticleController extends Controller
             : collect();
         $folders = Folder::where('user_id', Auth::user()->id)->get();
 
+        // $user_task = Task::where('user_id', Auth::user()->id)->get();
+
         $tasks = Task::all();
-        // $tasks = Task::where('user_id', User::user()->id)->get();
 
         return view('articles.index', [
             'articles' => $articles,
             'folders' => $folders,
             'tasks' => $tasks,
+            // 'user_task' => $user_task,
         ]);
     }
 
