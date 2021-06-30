@@ -87,36 +87,37 @@
                                 </thead>
                                 <tbody>
                                     @foreach($tasks as $task)
-                                        <tr>
-                                            <td>
-                                                {{ $task->title }}
-                                            </td>
-                                            <td>
-                                                <h6><span class="badge {{ $task->status_class }}">{{ $task->status_badge }}</span></h6>
-                                            </td>
-                                            <td>
-                                                {{ $task->formatted_due_date }}
-                                            </td>
-                                            <td>
-                                                <h6><span class="badge {{ $task->important_class }}">{{ $task->important_badge }}</span></h6>
-                                            </td>
-                                            <td>
-                                                <h6><span class="badge {{ $task->urgent_class }}">{{ $task->urgent_badge }}</span></h6>
-                                            </td>
-                                            <td>
-                                                <div class="dropup">
-                                                    <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <tr>
+                                        <td>
+                                            {{ $task->title }}
+                                        </td>
+                                        <td>
+                                            <h6><span class="badge {{ $task->status_class }}">{{ $task->status_badge }}</span></h6>
+                                        </td>
+                                        <td>
+                                            {{ $task->formatted_due_date }}
+                                        </td>
+                                        <td>
+                                            <h6><span class="badge {{ $task->important_class }}">{{ $task->important_badge }}</span></h6>
+                                        </td>
+                                        <td>
+                                            <h6><span class="badge {{ $task->urgent_class }}">{{ $task->urgent_badge }}</span></h6>
+                                        </td>
+                                        <td>
+                                            <div class="dropup">
+                                                <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                     <i class="fas fa-ellipsis-v"></i>
+                                                </a>
+                                                <div class="dropdown-menu dropdown-menu-right" style="z-index: 99;">
+                                                    <a class="dropdown-item" href="{{ route('tasks.edit', ['id' => $task->folder_id, 'task_id' => $task->id]) }}">
+                                                        <i class="fas fa-pen mr-1"></i>タスクを編集する
                                                     </a>
-                                                    <div class="dropdown-menu dropdown-menu-right" style="z-index: 99;">
-                                                        <a class="dropdown-item" href="{{ route('tasks.edit', ['id' => $task->folder_id, 'task_id' => $task->id]) }}">
-                                                            <i class="fas fa-pen mr-1"></i>タスクを編集する
-                                                        </a>
-                                                        <div class="dropdown-divider"></div>
-                                                        <a class="dropdown-item text-danger" onclick="document.getElementById('delete-form').submit();"><i class="fas fa-trash-alt mr-1"></i>タスクを削除する</a>
-                                                        <form method="POST" action="{{ route('tasks.destroy', ['task' => $task]) }}" id="delete-form">
+                                                    <div class="dropdown-divider"></div>
+                                                    {{-- <form method="POST" action="{{ route('tasks.destroy', ['task' => $task->id]) }}" id="delete-form"> --}}
+                                                        <form method="POST" action="{{ route('tasks.destroy', ['task_id' => $task->id]) }}" id="delete-form">
                                                             @csrf
                                                             @method('DELETE')
+                                                            <button class="dropdown-item text-danger" onclick="document.submit();"><i class="fas fa-trash-alt mr-1"></i>タスクを削除する</button>
                                                         </form>
                                                     </div>
                                                 </div>

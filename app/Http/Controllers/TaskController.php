@@ -95,10 +95,14 @@ class TaskController extends Controller
         ]);
     }
 
+    // public function destroy(int $task_id)
     public function destroy(int $task_id)
     {
+        // $task = \App\Task::find($task_id);
+        // dd($task_id);
         $task = \App\Task::find($task_id);
         $task->delete();
+
         session()->flash('flash_color', 'alert-danger');
         session()->flash('flash_icon', 'fas fa-trash-alt mr-2 fa-lg');
         session()->flash('flash_message', 'タスクを削除しました');

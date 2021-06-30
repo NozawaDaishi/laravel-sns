@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Tag;
+use App\Task;
 use Illuminate\Http\Request;
 
 class TagController extends Controller
@@ -11,6 +12,8 @@ class TagController extends Controller
     {
         $tag = Tag::where('name', $name)->first();
 
-        return view('tags.show', ['tag' => $tag]);
+        $tasks = Task::all();
+
+        return view('tags.show', ['tag' => $tag, 'tasks' => $tasks]);
     }
 }
